@@ -1,17 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtvo4y2axkvn1"]
+[gd_scene load_steps=6 format=3 uid="uid://dtvo4y2axkvn1"]
 
 [ext_resource type="Texture2D" uid="uid://cf1c3u7vduwaq" path="res://assets/background.png" id="1_lr5t8"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_suuov"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="2_j65yq"]
+[ext_resource type="PackedScene" uid="uid://bov5fg3t3n1w5" path="res://scenes/player.tscn" id="4_xcvai"]
+
+[sub_resource type="Curve2D" id="Curve2D_lmg4h"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_suuov")
 
 [node name="Background1" type="Sprite2D" parent="."]
 texture = ExtResource("1_lr5t8")
 centered = false
 script = ExtResource("2_j65yq")
+scroll_speed = 5
 
 [node name="Background2" type="Sprite2D" parent="."]
 position = Vector2(1920, 0)
 texture = ExtResource("1_lr5t8")
 centered = false
 script = ExtResource("2_j65yq")
+scroll_speed = 5
+
+[node name="Player" parent="." instance=ExtResource("4_xcvai")]
+position = Vector2(196, 324)
+
+[node name="AssignmentTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_lmg4h")
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(196, 324)

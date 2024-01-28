@@ -5,11 +5,11 @@ signal hit_distraction
 signal hit_chore
 
 @export var player_speed = 10
-@export var player_x_coord = 30
+@export var player_x_coord = 196
 
 const BACKGROUND_WIDTH = 1920
 
-var height_low_bound = 152 # (720-256)-256
+var height_low_bound = 200 # (720-256)-256
 var height_high_bound = 464
 
 var action_type
@@ -17,7 +17,7 @@ var action_type
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	action_type = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	$AnimatedSprite2D.play(action_type[0])
+	$AnimatedSprite2D.play(action_type[1])
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

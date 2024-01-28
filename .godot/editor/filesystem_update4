@@ -8,3 +8,5 @@ res://scripts/soap.gd
 res://scenes/soap.tscn
 res://assignment.gd
 res://scenes/assignment.tscn
+res://scripts/background.gd
+res://scripts/main.gd

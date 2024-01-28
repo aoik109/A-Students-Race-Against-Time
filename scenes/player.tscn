@@ -37,7 +37,7 @@ script = ExtResource("1_tmedy")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4fid4")
 animation = &"running"
-frame_progress = 0.328961
+frame_progress = 0.963016
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnxipabtca5xx"]
+
+[ext_resource type="Texture2D" uid="uid://bvp4l8imn07ts" path="res://assets/dishes.png" id="1_a78yd"]
+[ext_resource type="Script" path="res://scripts/chore.gd" id="1_sxao5"]
+[ext_resource type="Texture2D" uid="uid://cceh0annc8fyy" path="res://assets/laundry.png" id="2_x56iw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkdmo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_a78yd")
+}],
+"loop": true,
+"name": &"dishes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x56iw")
+}],
+"loop": true,
+"name": &"laundry",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kau6b"]
+radius = 124.0
+height = 268.0
+
+[node name="Chore" type="Area2D"]
+script = ExtResource("1_sxao5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xkdmo")
+animation = &"laundry"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-17, 20)
+shape = SubResource("CapsuleShape2D_kau6b")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

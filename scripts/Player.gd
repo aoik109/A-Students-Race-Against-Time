@@ -27,5 +27,7 @@ func _process(delta):
 		position.y += player_speed
 	position = position.clamp(Vector2(player_x_coord, height_low_bound), Vector2(player_x_coord, height_high_bound))
 
-func _on_body_entered(body):
-	$AnimatedSprite2D.play(action_type[0])
+
+# Reset the player
+func start(pos):
+	position = pos ## pos == Startposition (will be called in main) TODO

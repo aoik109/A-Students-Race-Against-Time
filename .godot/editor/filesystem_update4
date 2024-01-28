@@ -2,3 +2,5 @@ res://scenes/main.tscn
 res://scripts/Background.gd
 res://scenes/player.tscn
 res://scripts/Player.gd
+res://scenes/chore.tscn
+res://scripts/chore.gd

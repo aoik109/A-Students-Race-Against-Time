@@ -4,3 +4,5 @@ res://scenes/main.tscn
 res://scripts/distraction.gd
 res://scripts/player.gd
 res://scenes/chore.tscn
+res://scripts/soap.gd
+res://scenes/soap.tscn

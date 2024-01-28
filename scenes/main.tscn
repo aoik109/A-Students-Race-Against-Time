@@ -1,20 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtvo4y2axkvn1"]
+[gd_scene load_steps=11 format=3 uid="uid://dtvo4y2axkvn1"]
 
 [ext_resource type="Texture2D" uid="uid://cf1c3u7vduwaq" path="res://assets/background.png" id="1_lr5t8"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_suuov"]
 [ext_resource type="PackedScene" uid="uid://d03v864gmajox" path="res://scenes/assignment.tscn" id="2_g42s7"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="2_j65yq"]
+[ext_resource type="PackedScene" uid="uid://dnxipabtca5xx" path="res://scenes/chore.tscn" id="3_arb7w"]
+[ext_resource type="PackedScene" uid="uid://6y3b0jf725yg" path="res://scenes/distraction.tscn" id="4_mnere"]
 [ext_resource type="PackedScene" uid="uid://bov5fg3t3n1w5" path="res://scenes/player.tscn" id="4_xcvai"]
+[ext_resource type="PackedScene" uid="uid://d3nk3tajg75yf" path="res://scenes/soap.tscn" id="5_vp4hv"]
+[ext_resource type="FontFile" uid="uid://dpdl0ulvejmdw" path="res://assets/Xolonium-Regular.ttf" id="9_my2xo"]
 
 [sub_resource type="Curve2D" id="Curve2D_y0evs"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1922, 432, 0, 0, 0, 0, 1915, 634, 0, 0, 0, 0, 2081, 634, 0, 0, 0, 0, 2077, 428, 0, 0, 0, 0, 1922, 432)
+"points": PackedVector2Array(0, 0, 0, 0, 1918.49, 618.876, 0, 0, 0, 0, 1915.66, 413.105)
 }
-point_count = 5
+point_count = 2
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_suuov")
 assignment_scene = ExtResource("2_g42s7")
+chore_scene = ExtResource("3_arb7w")
+distraction_scene = ExtResource("4_mnere")
+soap_scene = ExtResource("5_vp4hv")
 
 [node name="Background1" type="Sprite2D" parent="."]
 texture = ExtResource("1_lr5t8")
@@ -30,26 +37,76 @@ script = ExtResource("2_j65yq")
 scroll_speed = 5
 
 [node name="AssignmentTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="ChoreTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="DistractionTimer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
+
+[node name="SoapTimer" type="Timer" parent="."]
+wait_time = 11.0
 
 [node name="StartTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
+autostart = true
 
 [node name="PlayerStartPosition" type="Marker2D" parent="."]
 position = Vector2(196, 324)
 
 [node name="SpawningArea" type="Path2D" parent="."]
-position = Vector2(-2307.23, 0)
-scale = Vector2(2.20482, 1)
+position = Vector2(-4181.62, 181.059)
+scale = Vector2(3.18251, 0.60261)
 curve = SubResource("Curve2D_y0evs")
 
 [node name="SpawningLocation" type="PathFollow2D" parent="SpawningArea"]
-position = Vector2(1922, 432)
-rotation = 1.60544
+position = Vector2(1918.49, 618.876)
+rotation = -1.58454
 
 [node name="Player" parent="." instance=ExtResource("4_xcvai")]
 position = Vector2(196, 324)
 
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Title" type="Label" parent="HUD"]
+offset_left = 1050.0
+offset_top = 89.0
+offset_right = 1799.0
+offset_bottom = 425.0
+theme_override_fonts/font = ExtResource("9_my2xo")
+theme_override_font_sizes/font_size = 80
+text = "A Student's Race Against Time"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Credits" type="Label" parent="HUD"]
+offset_left = 1419.0
+offset_top = 451.0
+offset_right = 1786.0
+offset_bottom = 649.0
+theme_override_fonts/font = ExtResource("9_my2xo")
+theme_override_font_sizes/font_size = 30
+text = "Amazing artwork by:
+Liansa
+ListlessJKO
+Merozumi"
+horizontal_alignment = 2
+
+[node name="Work in Progress" type="Label" parent="HUD"]
+offset_left = 1417.0
+offset_top = 636.0
+offset_right = 1784.0
+offset_bottom = 680.0
+theme_override_fonts/font = ExtResource("9_my2xo")
+theme_override_font_sizes/font_size = 30
+text = "Still a work in progress :)"
+horizontal_alignment = 2
+
 [connection signal="timeout" from="AssignmentTimer" to="." method="_on_assignment_timer_timeout"]
+[connection signal="timeout" from="ChoreTimer" to="." method="_on_chore_timer_timeout"]
+[connection signal="timeout" from="DistractionTimer" to="." method="_on_distraction_timer_timeout"]
+[connection signal="timeout" from="SoapTimer" to="." method="_on_soap_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="hit_assignment" from="Player" to="." method="_on_player_hit_assignment"]

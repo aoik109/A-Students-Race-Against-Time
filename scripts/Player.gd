@@ -1,6 +1,6 @@
 extends Area2D
 
-signal hit_progress
+signal hit_assignment
 signal hit_distraction
 signal hit_chore
 
@@ -33,3 +33,6 @@ func _process(delta):
 func start(pos):
 	position = pos ## pos == Startposition (will be called in main) TODO
 	$AnimatedSprite2D.play("running")
+	
+func _on_player_hit_assignment():
+	hit_assignment.emit()

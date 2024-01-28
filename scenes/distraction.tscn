@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://6y3b0jf725yg"]
+
+[ext_resource type="Script" path="res://scripts/distraction.gd" id="1_44ny7"]
+[ext_resource type="Texture2D" uid="uid://36f27yywptxn" path="res://assets/games.png" id="1_kwctd"]
+[ext_resource type="Texture2D" uid="uid://2xi610728r72" path="res://assets/scrolling.png" id="2_cbwgr"]
+[ext_resource type="Texture2D" uid="uid://b3mrk48stv1td" path="res://assets/youtube.png" id="3_44pd2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_50uve"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kwctd")
+}],
+"loop": true,
+"name": &"games",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cbwgr")
+}],
+"loop": true,
+"name": &"scrolling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_44pd2")
+}],
+"loop": true,
+"name": &"youtube",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3esl4"]
+size = Vector2(219, 214.688)
+
+[node name="Distraction" type="Area2D"]
+script = ExtResource("1_44ny7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_50uve")
+animation = &"games"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(121.5, 127.344)
+shape = SubResource("RectangleShape2D_3esl4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

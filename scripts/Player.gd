@@ -17,7 +17,7 @@ var action_type
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	action_type = $AnimatedSprite2D.sprite_frames.get_animation_names()
-	$AnimatedSprite2D.play(action_type[1])
+	$AnimatedSprite2D.play("running")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,4 +32,4 @@ func _process(delta):
 # Reset the player
 func start(pos):
 	position = pos ## pos == Startposition (will be called in main) TODO
-	$AnimatedSprite2D.play(action_type[1])
+	$AnimatedSprite2D.play("running")

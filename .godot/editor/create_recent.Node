@@ -1,5 +1,6 @@
-Marker2D
+PathFollow2D
 Path2D
+Marker2D
 Timer
 AnimatedSprite2D
 VisibleOnScreenNotifier2D

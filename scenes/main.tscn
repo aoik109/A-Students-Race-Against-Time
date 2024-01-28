@@ -1,14 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtvo4y2axkvn1"]
+[gd_scene load_steps=7 format=3 uid="uid://dtvo4y2axkvn1"]
 
 [ext_resource type="Texture2D" uid="uid://cf1c3u7vduwaq" path="res://assets/background.png" id="1_lr5t8"]
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_suuov"]
+[ext_resource type="PackedScene" uid="uid://d03v864gmajox" path="res://scenes/assignment.tscn" id="2_g42s7"]
 [ext_resource type="Script" path="res://scripts/background.gd" id="2_j65yq"]
 [ext_resource type="PackedScene" uid="uid://bov5fg3t3n1w5" path="res://scenes/player.tscn" id="4_xcvai"]
 
-[sub_resource type="Curve2D" id="Curve2D_lmg4h"]
+[sub_resource type="Curve2D" id="Curve2D_y0evs"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1922, 432, 0, 0, 0, 0, 1915, 634, 0, 0, 0, 0, 2081, 634, 0, 0, 0, 0, 2077, 428, 0, 0, 0, 0, 1922, 432)
+}
+point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_suuov")
+assignment_scene = ExtResource("2_g42s7")
 
 [node name="Background1" type="Sprite2D" parent="."]
 texture = ExtResource("1_lr5t8")
@@ -23,17 +29,27 @@ centered = false
 script = ExtResource("2_j65yq")
 scroll_speed = 5
 
-[node name="Player" parent="." instance=ExtResource("4_xcvai")]
-position = Vector2(196, 324)
-
 [node name="AssignmentTimer" type="Timer" parent="."]
 wait_time = 3.0
+autostart = true
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_lmg4h")
-
-[node name="StartPosition" type="Marker2D" parent="."]
+[node name="PlayerStartPosition" type="Marker2D" parent="."]
 position = Vector2(196, 324)
+
+[node name="SpawningArea" type="Path2D" parent="."]
+position = Vector2(-2307.23, 0)
+scale = Vector2(2.20482, 1)
+curve = SubResource("Curve2D_y0evs")
+
+[node name="SpawningLocation" type="PathFollow2D" parent="SpawningArea"]
+position = Vector2(1922, 432)
+rotation = 1.60544
+
+[node name="Player" parent="." instance=ExtResource("4_xcvai")]
+position = Vector2(196, 324)
+
+[connection signal="timeout" from="AssignmentTimer" to="." method="_on_assignment_timer_timeout"]

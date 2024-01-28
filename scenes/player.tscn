@@ -28,7 +28,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mssqu"]
-radius = 45.0
+radius = 52.0
 height = 182.0
 
 [node name="Player" type="Area2D"]
@@ -41,5 +41,5 @@ frame_progress = 0.963016
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(139, 165)
+position = Vector2(149, 168)
 shape = SubResource("CapsuleShape2D_mssqu")
